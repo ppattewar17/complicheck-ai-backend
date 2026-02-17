@@ -1,4 +1,3 @@
-const fs = require("fs");
 const rules = require("../rules/complianceRules.json");
 const keywordMap = require("../rules/keywordMap.json");
 const { extractTextFromImage } = require("../services/ocrService");
@@ -72,19 +71,18 @@ const validators = {
  * -------------------------
  */
 exports.checkComplianceWithOCR = async (req, res) => {
-  let imagePath;
-
   try {
     const { category } = req.body;
 
-    // 1️⃣ Validate input
+    // Validate input
     if (!category || !req.file) {
       return res.status(400).json({
         error: "category and image required",
       });
     }
 
-    imagePath = req.file.path;
+    // Use buffer from memory storage
+    const imageBuffer = req.file.buffer;
 
     const categoryRules = rules[category];
     const categoryKeywords = keywordMap[category];
@@ -95,8 +93,8 @@ exports.checkComplianceWithOCR = async (req, res) => {
       });
     }
 
-    // 2️⃣ OCR extraction
-    const extractedTextRaw = await extractTextFromImage(imagePath);
+    // OCR extraction
+    const extractedTextRaw = await extractTextFromImage(imageBuffer);
     console.log("OCR RAW TEXT 👉\n", extractedTextRaw);
 
     const text = extractedTextRaw.toLowerCase();
@@ -163,7 +161,7 @@ exports.checkComplianceWithOCR = async (req, res) => {
       if (found) score += weight;
     }
 
-    // 4️⃣ Final score & decision
+    // Final score & decision
     const percentage =
       total > 0 ? Math.round((score / total) * 100) : 0;
 
@@ -173,18 +171,13 @@ exports.checkComplianceWithOCR = async (req, res) => {
       status = "NEEDS_REVIEW";
     else if (percentage >= 60) status = "NEEDS_REVIEW";
 
-    // 5️⃣ Cleanup uploaded image
-    if (imagePath && fs.existsSync(imagePath)) {
-      fs.unlinkSync(imagePath);
-    }
-
     await ComplianceResult.create({
-  category,
-  score: percentage,
-  status,
-  breakdown,
-  extractedText: extractedTextRaw,
-});
+      category,
+      score: percentage,
+      status,
+      breakdown,
+      extractedText: extractedTextRaw,
+    });
 
     return res.json({
       category,
@@ -196,10 +189,6 @@ exports.checkComplianceWithOCR = async (req, res) => {
 
   } catch (error) {
     console.error("OCR ERROR 👉", error);
-
-    if (imagePath && fs.existsSync(imagePath)) {
-      fs.unlinkSync(imagePath);
-    }
 
     return res.status(500).json({
       error: "OCR processing failed",

@@ -5,7 +5,15 @@ const { checkComplianceWithOCR } = require("../controllers/ocrComplianceControll
 
 router.post(
   "/check-compliance-ocr",
-  upload.single("image"),
+  (req, res, next) => {
+    upload.single("image")(req, res, (err) => {
+      if (err) {
+        console.error("Upload error:", err);
+        return res.status(400).json({ error: "File upload failed", details: err.message });
+      }
+      next();
+    });
+  },
   checkComplianceWithOCR
 );
 

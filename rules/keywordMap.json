@@ -1,0 +1,28 @@
+{
+  "food": {
+    "fssai_number": ["fssai", "license"],
+    "net_quantity": ["net qty", "net wt", "g", "kg", "ml"],
+    "mrp": ["mrp", "rs", "₹"],
+    "manufacturing_date": ["mfg", "manufactured"],
+    "expiry_date": ["expiry", "best before"],
+    "ingredients": ["ingredients"],
+    "manufacturer_details": ["manufactured by", "packed by"]
+  },
+
+  "cosmetic": {
+    "batch_number": ["batch", "lot"],
+    "manufacturing_date": ["mfg", "manufactured"],
+    "expiry_date": ["expiry", "use before"],
+    "ingredients": ["ingredients"],
+    "usage_warning": ["warning", "caution", "for external use only"],
+    "manufacturer_details": ["manufactured by"]
+  },
+
+  "electrical": {
+    "voltage_rating": ["v", "volt", "voltage"],
+    "power_rating": ["w", "watt"],
+    "isi_mark": ["isi", "bis"],
+    "safety_instructions": ["warning", "caution", "risk"],
+    "manufacturer_details": ["manufactured by"]
+  }
+}

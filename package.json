@@ -1,0 +1,30 @@
+{
+  "name": "complicheck-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Complicheck AI",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^4.18.2",
+    "mongoose": "^9.1.6",
+    "multer": "^2.0.2",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "compliance",
+    "ocr",
+    "ai",
+    "document-analysis"
+  ],
+  "author": "",
+  "license": "ISC"
+}

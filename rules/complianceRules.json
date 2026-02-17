@@ -1,0 +1,31 @@
+{
+  "food": {
+    "product_name": { "weight": 10, "required": true },
+    "fssai_number": { "weight": 20, "required": true },
+    "net_quantity": { "weight": 10, "required": true },
+    "mrp": { "weight": 10, "required": true },
+    "manufacturing_date": { "weight": 10, "required": true },
+    "expiry_date": { "weight": 15, "required": true },
+    "ingredients": { "weight": 10, "required": true },
+    "manufacturer_details": { "weight": 15, "required": true }
+  },
+
+  "cosmetic": {
+    "product_name": { "weight": 15, "required": true },
+    "batch_number": { "weight": 15, "required": true },
+    "manufacturing_date": { "weight": 15, "required": true },
+    "expiry_date": { "weight": 15, "required": true },
+    "ingredients": { "weight": 15, "required": true },
+    "manufacturer_details": { "weight": 15, "required": true },
+    "usage_warning": { "weight": 10, "required": true }
+  },
+
+  "electrical": {
+    "product_name": { "weight": 20, "required": true },
+    "voltage_rating": { "weight": 15, "required": true },
+    "power_rating": { "weight": 15, "required": true },
+    "isi_mark": { "weight": 20, "required": true },
+    "manufacturer_details": { "weight": 15, "required": true },
+    "safety_instructions": { "weight": 15, "required": true }
+  }
+}
